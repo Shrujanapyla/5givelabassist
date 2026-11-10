@@ -20,6 +20,11 @@ Thumbs.db
 _deployment-manifest-backup/
 _edge_deploy_stage/
 _edge_tools/
+docs/USER_MANUAL.md
+docs/LOCAL_EXECUTION_GUIDE.md
+docs/WINDOWS_LOCAL_TESTING.md
+docs/EXPERIMENT_EXECUTION_GUIDE.md
+docs/DEMO_VIDEO_GUIDE.md
 
 ai-service/*.pt
 .pytest_cache/

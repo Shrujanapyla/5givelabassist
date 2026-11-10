@@ -90,7 +90,7 @@ For the full walkthrough, including troubleshooting and optional features, see t
 
 ## Optional AI and MEC benchmark
 
-The core launcher does not start the optional AI service. AI assistance and the MEC image benchmark require the Python inference service, compatible dependencies, and an approved local model. The benchmark also requires `AI_SERVICE_URL` in `server/.env` to point to the running service. Follow the [local execution guide](docs/LOCAL_EXECUTION_GUIDE.md) for AI setup. The benchmark sends only the image you select; it does not automatically upload lab video.
+The core launcher does not start the optional AI service. AI assistance and the MEC image benchmark require the Python inference service, compatible dependencies, and an approved local model. The benchmark also requires `AI_SERVICE_URL` in `server/.env` to point to the running service. The benchmark sends only the image you select; it does not automatically upload lab video.
 
 ## Verification
 
@@ -106,15 +106,10 @@ npm run verify:ai
 
 The AI check may skip when its optional Python dependencies are not installed.
 
-## Deployment and project guides
+## Deployment and verification
 
-- [User Manual](docs/USER_MANUAL.md)
-- [Windows local setup and troubleshooting](docs/WINDOWS_LOCAL_TESTING.md)
-- [Local execution guide](docs/LOCAL_EXECUTION_GUIDE.md)
-- [Experiment execution guide](docs/EXPERIMENT_EXECUTION_GUIDE.md)
-- [Demo video guide](docs/DEMO_VIDEO_GUIDE.md)
 - [Feature verification and limitations](docs/FEATURE_VERIFICATION.md)
-- [Linux/MEC deployment instructions](deploy/README.md)
+- [Linux/MEC deployment configuration](deploy/README.md)
 
 The Linux files are templates; the college VM, DNS, HTTPS certificate, firewall, and production secrets must be supplied/configured by the server administrator. A localhost run does not validate the university MEC or 5G network.
 
