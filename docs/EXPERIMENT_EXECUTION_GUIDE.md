@@ -11,7 +11,6 @@ flowchart LR
   B[Node.js / Express API<br/>Socket.IO signaling, sessions, snapshots]
   M[Application host / MEC<br/>same Node app when deployed there]
   A[Optional FastAPI + YOLO service<br/>local model weights required]
-  C[Optional configured cloud inference endpoint]
 
   P <-->|WebRTC media: peer to peer| S
   P <-->|HTTPS/API and Socket.IO| B
@@ -21,7 +20,6 @@ flowchart LR
   B -->|AI inference request| A
   P -->|explicit benchmark image| B
   B -->|MEC benchmark target| A
-  B --> C
 ```
 
 The browsers exchange session and WebRTC signaling through Node.js/Express and Socket.IO; audio/video media is peer-to-peer between the browsers. The professor annotates the selected student stream, and ROI snapshots are shared through the session backend. Browser `RTCPeerConnection` statistics are WebRTC endpoint metrics. Separately, the MEC monitor measures browser-observed HTTP response time and periodic bounded transfers to the app backend. Those measurements become device-to-MEC-path measurements only when the app is hosted on the university edge and the browser reaches it over that network.
@@ -117,8 +115,8 @@ There is no IP-camera step: Ethernet IP camera/MediaMTX integration was removed 
 - WebRTC metrics with units and the selected/adaptive profile.
 - MEC panel after at least six probes; label the measured route (localhost, LAN or edge).
 - AI/benchmark outputs only when their service is actually available. Preserve the unavailable state if it is the genuine outcome.
-- Do not edit or manufacture metrics. Record device/browser, connection type, endpoint location, number of sessions, and whether AI/cloud endpoints were configured.
+- Do not edit or manufacture metrics. Record device/browser, connection type, endpoint location, number of sessions, and whether the AI/MEC inference service was configured.
 
 ## D. What each setup validates
 
-The backend suite validates authentication/authorization, session capacity/isolation, snapshot sharing and persistence, WebRTC signaling/metrics relay, MEC endpoints, audit secrecy, and health behavior. Frontend unit tests validate WebRTC metric calculations, adaptive policy, benchmark summaries, and detection-box geometry. They do not establish that two physical browsers negotiated media, a camera stayed available, a university network routed over 5G, or edge processing outperformed cloud. Those require live browser/device, endpoint, and network tests.
+The backend suite validates authentication/authorization, session capacity/isolation, snapshot sharing and persistence, WebRTC signaling/metrics relay, MEC endpoints, audit secrecy, and health behavior. Frontend unit tests validate WebRTC metric calculations, adaptive policy, benchmark summaries, and detection-box geometry. They do not establish that two physical browsers negotiated media, a camera stayed available, or a university network routed over 5G. Those require live browser/device and network tests.

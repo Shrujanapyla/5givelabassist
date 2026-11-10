@@ -56,7 +56,7 @@ AI_SERVICE_URL=http://127.0.0.1:8000
 DATA_DIR=./data
 ```
 
-Keep the optional admin and cloud settings empty unless you have a configured endpoint. The demo enrollment keys are for local development only. The source defaults to those two demo values only when the environment variables are absent; blank values in `.env` disable registration for that role.
+Keep the optional admin setting empty unless you use that role. The demo enrollment keys are for local development only. The source defaults to those two demo values only when the environment variables are absent; blank values in `.env` disable registration for that role.
 
 Set `VITE_SERVER_URL=http://localhost:3101` in `client/.env.local`. In this workspace those settings already exist. The guide never asks you to copy a real `.env` file into the source package.
 

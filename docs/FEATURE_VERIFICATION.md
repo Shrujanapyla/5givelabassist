@@ -11,7 +11,7 @@ Verification performed on 2026-11-10 in this Windows workspace. This status desc
 - Vite production build passed (70 modules transformed).
 - A real local startup check returned backend health ok and frontend HTTP 200. AI health at 127.0.0.1:8000 was unavailable.
 - Optional AI Python tests were skipped by the existing runner because FastAPI and Pillow are not installed. YOLO weights are not bundled or present.
-- No physical multi-device WebRTC test, actual 5G test, college MEC VM deployment, cloud inference run, or camera hardware test was performed.
+- No physical multi-device WebRTC test, actual 5G test, college MEC VM deployment, MEC inference run, or camera hardware test was performed.
 
 ## Feature matrix
 
@@ -45,7 +45,6 @@ Verification performed on 2026-11-10 in this Windows workspace. This status desc
 - Backend PORT: 3101; CLIENT_ORIGIN includes http://localhost:5180; frontend VITE_SERVER_URL: http://localhost:3101.
 - Root launcher frontend port: 5180.
 - AI_SERVICE_URL is configured as http://127.0.0.1:8000, but the service process was not available during the startup check.
-- Cloud inference URL is unset. The benchmark must show the cloud endpoint as unconfigured.
 - Current server/data contains local user/session/audit records; these files are excluded from the source ZIP.
 - There is no ai-service/.venv, AI model weights, MediaMTX service, or college-edge deployment in the current project.
 
@@ -56,7 +55,7 @@ Verification performed on 2026-11-10 in this Windows workspace. This status desc
 3. Observe the MEC dashboard over a sustained test path and label whether it is localhost, LAN, or university edge.
 4. Perform controlled, authorized network impairment if demonstrating automatic bitrate adaptation; capture the actual profile transition and peer statistics.
 5. If AI is required, install compatible Python packages and approved weights, then test inference and ROI alignment using the intended browser.
-6. If benchmark comparison is required, configure a compatible MEC inference endpoint and an authorized cloud endpoint; run paired samples and retain genuine results.
+6. If MEC benchmarking is required, configure the MEC inference endpoint; run explicitly selected image samples and retain genuine results.
 7. Deploy the prepared Linux configuration only after the college administrator supplies hostname, TLS certificate, firewall/routing, service account, persistent storage and production secrets. Then repeat checks from a device on the intended 5G network. This is the only way to assess that university path; no such deployment was done here.
 
 ## Lint warnings observed

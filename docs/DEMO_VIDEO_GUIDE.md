@@ -20,7 +20,7 @@ Target length: about 4 minutes. Record the local application at `http://localhos
 - Start recording only after the webcam stream, annotations, workspace, and network cards are visible.
 - Allow enough time for a MEC throughput sample; it runs periodically, not on every probe.
 - Show AI only after a real inference returns. The health route alone does not prove model readiness.
-- The cloud endpoint is not configured in the current local environment. Do not imply a MEC-vs-cloud result when the cloud card says unavailable.
+- The benchmark measures the configured MEC inference endpoint only. Present results only when the service is available and samples succeed.
 - Ethernet IP camera/MediaMTX streaming is not implemented in the current project and must not appear as a completed demo segment.
 - Do not show private `.env` files or expose passwords, session tokens, account records, or personal content.
 - Say whether this recording used localhost, LAN, or the university's HTTPS edge host. Do not call a localhost run a 5G test.

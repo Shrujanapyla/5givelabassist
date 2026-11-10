@@ -19,10 +19,10 @@ Remote laboratory guidance needs a way for a professor to observe a student's li
 - Browser WebRTC endpoint statistics and student sender-side High/Medium/Low adaptive video controls.
 - Authenticated HTTP application-path monitoring with periodic bounded upload/download samples.
 - Optional FastAPI service for generic YOLO COCO object detection on sampled video frames.
-- Professor image benchmark UI/API for configured MEC and cloud inference endpoints.
+- Professor image benchmark UI/API for a configured MEC inference endpoint.
 - Linux deployment preparation: Nginx reverse proxy, Node/AI systemd service templates and environment examples.
 
-**Not implemented in this version:** Ethernet IP camera/MediaMTX/ONVIF, 5G radio/air-interface metrics, an SFU, or a configured TURN relay. Cloud inference is not configured in the current local environment. AI inference requires external Python packages and a local model file.
+**Not implemented in this version:** Ethernet IP camera/MediaMTX/ONVIF, 5G radio/air-interface metrics, an SFU, or a configured TURN relay. AI inference requires external Python packages and a local model file.
 
 Feature-level evidence and test limitations are in [docs/FEATURE_VERIFICATION.md](docs/FEATURE_VERIFICATION.md).
 
@@ -153,7 +153,7 @@ It runs the backend integration suite, frontend unit tests, lint, and production
 
 On 2026-11-10, npm run verify:all completed successfully. The backend suite passed; 14 frontend unit tests passed; lint exited successfully with existing warnings; the production build passed. The optional AI tests were skipped because FastAPI and Pillow were not installed. A startup check returned API health ok and frontend HTTP 200; AI at port 8000 was unavailable.
 
-No end-to-end browser video test, physical multi-device test, real 5G test, AI inference run, cloud/MEC comparative run, or college server deployment has been completed.
+No end-to-end browser video test, physical multi-device test, real 5G test, AI inference run, or college server deployment has been completed.
 
 ## 12. MEC deployment
 
@@ -168,7 +168,6 @@ These files have not been tested on the university VM. The admin must configure 
 - HTTP RTT/throughput is the browser-to-application path, not radio latency or packet loss.
 - No 5G radio, slicing, QoS, or one-way air-interface measurements are implemented.
 - YOLO weights and optional Python dependencies are not included; labels are generic COCO, advisory, and not lab-specific.
-- Cloud benchmarking is not part of the current MEC-only benchmark workflow.
 - No Ethernet IP camera, MediaMTX or ONVIF feature exists in this version.
 - Linux MEC templates are not deployed or validated on a college server.
 - Lint currently reports warnings in existing code; they do not block the build.
@@ -178,6 +177,7 @@ These files have not been tested on the university VM. The admin must configure 
 The existing `5G_Live_Lab_Assist_2.0_reproducibility.zip` is a local generated artifact and is intentionally excluded from Git; regenerate it after source changes before sharing. The legacy edge bundle is also excluded because it contains an outdated frontend endpoint. The source, lockfiles, scripts, example configurations, deployment templates, and documentation are the Git-ready project contents.
 
 - [Local execution guide](docs/LOCAL_EXECUTION_GUIDE.md)
+- [End-user manual](docs/USER_MANUAL.md)
 - [Experiment execution guide](docs/EXPERIMENT_EXECUTION_GUIDE.md)
 - [Demonstration video guide](docs/DEMO_VIDEO_GUIDE.md)
 - [Feature verification matrix](docs/FEATURE_VERIFICATION.md)
