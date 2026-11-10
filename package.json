@@ -1,0 +1,19 @@
+{
+  "name": "5g-live-lab-assist-2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Single-command launcher, checkpoint/resume and verification scripts for 5G Live Lab Assist",
+  "scripts": {
+    "start": "node scripts/start.js",
+    "setup": "node scripts/setup.js",
+    "verify": "node scripts/verify.js",
+    "verify:ai": "node scripts/verify-ai.js",
+    "resume": "node scripts/resume.js",
+    "checkpoint": "node scripts/checkpoint.js",
+    "verify:all": "npm run verify && npm run verify:ai",
+    "status": "node scripts/resume.js"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}

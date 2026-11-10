@@ -1,0 +1,103 @@
+{
+  "project": "5G Live Lab Assist 2.0",
+  "baseline": "User-confirmed GitHub master merge commit f6b8b51; reconstructed from the latest project archive and supplied Claude progress transcript. Claude private workspace files were not exported.",
+  "lastUpdated": "2026-11-10T15:56:25+05:30",
+  "checkpointCount": 8,
+  "excluded": [],
+  "modules": [
+    {
+      "id": "M1",
+      "name": "MEC deployment preparation",
+      "status": "deployment_prepared",
+      "note": "Production Nginx, systemd, environment and deployment instructions are prepared under deploy/. Actual university VM setup, DNS, trusted certificates, firewall rules and deployment acceptance remain pending. The preexisting edge ZIP contains a legacy non-loopback frontend endpoint and is preserved; build from current source using deploy/README.md.",
+      "files": [
+        "deploy/README.md",
+        "deploy/nginx/5g-live-lab-assist.conf",
+        "deploy/systemd/5g-live-lab-assist.service",
+        "deploy/.env.example"
+      ]
+    },
+    {
+      "id": "M2",
+      "name": "Real-time WebRTC network monitoring",
+      "status": "implemented",
+      "note": "One-second RTCPeerConnection.getStats sampling; selected/nominated candidate-pair WebRTC RTT, jitter, packet-loss interval deltas, bitrate, FPS, resolution and connection state. Student sender-side metrics are relayed to the professor. Unit tests cover metrics and now confirm peer metrics are cleared when a participant leaves; real WebRTC/camera acceptance remains.",
+      "files": [
+        "client/src/features/network/networkStats.js",
+        "client/src/features/network/NetworkDashboard.jsx",
+        "client/src/features/network/network.css",
+        "client/src/features/network/networkStats.test.js",
+        "server/app.js"
+      ]
+    },
+    {
+      "id": "M3",
+      "name": "Network-aware adaptive video",
+      "status": "implemented_with_limitations",
+      "note": "High/medium/low RTCRtpSender profiles cap bitrate, frame rate and resolution scale. Policy applies smoothing, hysteresis and cooldown; RTT alone does not trigger downshift. Manual fallback selector remains available. Unit tests verify profile parameters are passed to setParameters and UI profile state advances only when a sender accepts the change; real browser encoder behavior and controlled network impairment remain untested.",
+      "files": [
+        "client/src/features/network/adaptiveStreaming.js",
+        "client/src/features/network/NetworkDashboard.jsx"
+      ]
+    },
+    {
+      "id": "M4",
+      "name": "AI-assisted video analysis (optional stretch module)",
+      "status": "implemented_with_limitations",
+      "note": "Optional FastAPI sampled-frame API and generic YOLO COCO inference adapter; authenticated Node proxy; source participant/session/frame timestamp metadata; normalized detections; object-fit-cover overlay; advisory alerts; selected detection can be cropped into the shared ROI workspace. Local AI_SERVICE_URL is configured; frontend now retries transient service errors with backoff. Model weights/dependencies are absent locally, so inference was not run. Python image tests remain unavailable because Pillow/pip are missing. Generic COCO detector only, not lab-specific or safety-critical.",
+      "files": [
+        "ai-service/main.py",
+        "ai-service/requirements.txt",
+        "ai-service/test_image_utils.py",
+        "client/src/features/ai/AIAnalysisPanel.jsx",
+        "client/src/features/ai/DetectionOverlay.jsx",
+        "client/src/features/ai/aiGeometry.js",
+        "client/src/features/ai/aiGeometry.test.js",
+        "server/app.js"
+      ]
+    },
+    {
+      "id": "M5",
+      "name": "Security and authentication",
+      "status": "implemented_with_limitations",
+      "note": "Role-bound enrollment keys; production fail-fast checks require distinct strong professor/student secrets and valid HTTPS origin/absolute data directory; bcryptjs password hashing; registered browser/device IDs; 12-hour process-memory tokens invalidated on restart; authenticated Socket.IO; session/role checks; rate limits; upload validation; append-only audit records. User/audit/session/snapshot data are persisted privately. Backend integration passed with installed bcryptjs. TLS templates use Nginx; trusted certs are not bundled. Not a security certification.",
+      "files": [
+        "server/app.js",
+        "server/index.js",
+        "server/test-integration.js",
+        "client/src/features/auth/AuthScreen.jsx",
+        "client/vite.config.js",
+        "server/.env.example",
+        "client/.env.example"
+      ]
+    },
+    {
+      "id": "M6",
+      "name": "Multi-device sessions",
+      "status": "implemented_with_limitations",
+      "note": "Small-group star topology: one professor and up to three students, one targeted WebRTC student-to-professor connection per student, participant tiles with camera/connection state, server room isolation, per-student metrics, targeted signaling, reconnect rejoin and capacity checks. Backend tests cover three-student capacity, targeted signaling, session isolation and reconnect without ghost sockets. Real simultaneous camera acceptance on multiple browsers/devices and load measurements remain. This is not an SFU.",
+      "files": [
+        "client/src/App.jsx",
+        "client/src/features/participants/RemoteVideoTile.jsx",
+        "server/app.js",
+        "server/test-integration.js"
+      ]
+    }
+  ],
+  "verification": {
+    "backendIntegration": "passed via npm run verify:all on Node 22.23.4; authenticated roles, sessions/capacity/isolation, snapshot/history persistence, targeted signaling/metric relay, MEC endpoints, audit secrecy and health",
+    "frontendUnitTests": "passed: 14 tests for WebRTC stats, adaptation, benchmark summaries and AI geometry",
+    "pythonAiImageTests": "skipped: FastAPI and Pillow are not installed; YOLO model weights are absent",
+    "javascriptSyntax": "passed: server/app.js and server/test-integration.js node --check",
+    "optionalTlsSmokeTest": "passed using a temporary self-signed test certificate; no certificate included in ZIP",
+    "frontendLint": "passed with existing warnings in App.jsx, NetworkDashboard.jsx, RemoteVideoTile.jsx and RoiViewport.jsx",
+    "frontendProductionBuild": "passed: Vite 8.3.5 production build",
+    "localRuntime": "passed: launcher started frontend 5180 and backend 3101; frontend returned HTTP 200 and /health returned ok; optional AI service unavailable",
+    "browserCameraAcceptance": "not run in this container",
+    "real5GNetworkAcceptance": "not run; deployment and real network acceptance remain pending",
+    "aiModelInference": "not run; ultralytics/model weights are optional and not bundled",
+    "finalDocumentation": "README, local execution, experiment execution, demo video and feature verification guides prepared.",
+    "sourcePackage": "Existing 5G_Live_Lab_Assist_2.0_reproducibility.zip is a generated local artifact and excluded from Git; regenerate after source changes if sharing."
+  },
+  "nextRecommended": "Use docs/EXPERIMENT_EXECUTION_GUIDE.md and docs/DEMO_VIDEO_GUIDE.md for local evaluation. Remaining acceptance needs live physical browsers, optional AI dependencies/weights, a configured MEC inference service, and college network/VM access. Ethernet IP camera/MediaMTX is not implemented. Cloud benchmarking has been removed."
+}

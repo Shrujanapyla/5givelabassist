@@ -1,0 +1,23 @@
+[Unit]
+Description=5G Live Lab Assist Node API and Socket.IO
+After=network.target
+
+[Service]
+Type=simple
+User=5glab
+Group=5glab
+WorkingDirectory=/opt/5g-live-lab-assist/server
+Environment=NODE_ENV=production
+EnvironmentFile=/etc/5g-live-lab-assist/server.env
+ExecStart=/usr/bin/node /opt/5g-live-lab-assist/server/index.js
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/5g-live-lab-assist
+
+[Install]
+WantedBy=multi-user.target
